@@ -27,21 +27,20 @@ const check = document.getElementById("check");
 
 //check the right input from forms and if its ok -> add the new book (object in array)
 //via Book function and start render function
-function submit() {
+function addBook() {
   if (
-    title.value == null ||
-    title.value == "" ||
-    pages.value == null ||
-    pages.value == ""
+    !title.value.trim() ||
+    !author.value.trim() ||
+    !pages.value.trim()
   ) {
     alert("Please fill all fields!");
-    return false;
-  } else {
-    let book = new Book(title.value, title.value, pages.value, check.checked);
-    library.push(book);
+    return;
+  } 
+    let book = new Book(title.value.trim(), author.value.trim(), pages.value, check.checked);
+    myLibrary.push(book);
     render();
   }
-}
+
 
 function Book(title, author, pages, check) {
   this.title = title;
