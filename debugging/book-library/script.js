@@ -75,7 +75,7 @@ function render() {
     changeBut.className = "btn btn-success";
     wasReadCell.appendChild(changeBut);
     let readStatus = "";
-    if (myLibrary[i].check == false) {
+    if (myLibrary[i].check) {
       readStatus = "Yes";
     } else {
       readStatus = "No";
@@ -89,14 +89,23 @@ function render() {
 
     //add delete button to every row and render again
     let delButton = document.createElement("button");
-    delBut.id = i + 5;
-    deleteCell.appendChild(delBut);
-    delBut.className = "btn btn-warning";
-    delBut.innerHTML = "Delete";
-    delBut.addEventListener("clicks", function () {
-      alert(`You've deleted title: ${myLibrary[i].title}`);
-      myLibrary.splice(i, 1);
-      render();
+    delButton.className = "btn btn-primary";
+    delButton.textContent = "Delete";
+    delButton.addEventListener("click", function() {
+      if (confirm(`Delete "${myLibrary[i].title}" from your library?`)) {
+    myLibrary.splice(i, 1);
+    render();
+      }
+      
     });
+    deleteCell.appendChild(delButton);
+    // deleteCell.appendChild(delBut);
+    // delBut.className = "btn btn-warning";
+    // delBut.innerHTML = "Delete";
+    // delBut.addEventListener("clicks", function () {
+    //   alert(`You've deleted title: ${myLibrary[i].title}`);
+    //   myLibrary.splice(i, 1);
+    //   render();
+    
   }
 }
