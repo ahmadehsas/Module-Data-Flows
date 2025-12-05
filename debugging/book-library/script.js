@@ -42,11 +42,11 @@ function addBook() {
   }
 
 
-function Book(title, author, pages, check) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.check = check;
+  this.check = read;
 }
 
 function render() {
