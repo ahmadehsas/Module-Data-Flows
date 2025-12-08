@@ -20,15 +20,29 @@ const check = document.getElementById("check");
 
 // Add a new book to the library
 function addBook() {
-  if (!title.value.trim() || !author.value.trim() || !pages.value.trim()) {
+  const titleValue = title.value.trim();
+  const authorValue = author.value.trim();
+  const pagesValue = pages.value.trim();
+  const isRead = check.checked;
+
+  // Validate input fields
+  if (!titleValue || !authorValue || !pagesValue) {
     alert("Please fill all fields!");
-    return;
+    return false;
   }
-  let book = new Book(title.value.trim(), author.value.trim(), pages.value, check.checked);
+
+  // Validate "number of pages" field
+  const pagesNumber = parseInt(pagesValue, 10);
+  if (isNaN(pagesNumber) || pagesNumber <= 0) {
+    alert("Please enter a valid number of pages!");
+    return false;
+  }
+
+  // Create a new book and add it to the library
+  const book = new Book(titleValue, authorValue, pagesNumber, isRead);
   myLibrary.push(book);
   render();
 }
-
 // Book constructor
 function Book(title, author, pages, read) {
   this.title = title;
